@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Project Idea Generator — Powered by Google AI</title>
+    <meta name="description" content="Generate creative project ideas for your thesis, portfolio, or hackathon using AI powered by Google Gemini">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Marked.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236366f1'/><text x='50' y='72' font-size='60' text-anchor='middle' fill='white'>⚡</text></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-effects">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+        <div class="bg-grid"></div>
+        <!-- Floating Particles -->
+        <div class="particle particle-1" style="left:10%"></div>
+        <div class="particle particle-2" style="left:25%"></div>
+        <div class="particle particle-3" style="left:45%"></div>
+        <div class="particle particle-4" style="left:65%"></div>
+        <div class="particle particle-5" style="left:80%"></div>
+        <div class="particle particle-6" style="left:92%"></div>
+    </div>
+
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Sidebar Brand -->
+            <div class="sidebar-brand">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="brand-info">
+                    <span class="brand-name">IdeaForge</span>
+                    <span class="brand-version">v2.0 — Gemini AI</span>
+                </div>
+            </div>
+
+            <button id="new-chat-btn" class="new-chat-btn">
+                <i class="fa-solid fa-plus"></i>
+                <span>Chat Baru</span>
+                <kbd>Alt+N</kbd>
+            </button>
+
+            <!-- Search History -->
+            <div class="sidebar-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-history" placeholder="Cari riwayat...">
+            </div>
+
+            <div class="history-list-title">
+                <span>Riwayat Chat</span>
+                <span class="history-count" id="history-count">0</span>
+            </div>
+
+
+            <div id="history-list" class="history-list">
+                <!-- Injected by JS -->
+            </div>
+
+            <!-- Sidebar Footer / User Section -->
+            <div class="sidebar-footer">
+                <div class="model-info">
+                    <div class="model-status">
+                        <span class="status-dot"></span>
+                        <span>Gemini — Online</span>
+                    </div>
+                    <span class="model-provider">via Google AI Studio</span>
+                </div>
+                <button id="delete-all-btn" class="delete-all-btn" title="Hapus Semua Riwayat">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="app-container">
+            <!-- Header -->
+            <header class="chat-header">
+                <button id="sidebar-toggle" class="sidebar-toggle" title="Toggle Sidebar">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="header-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <span class="header-pulse"></span>
+                </div>
+                <div class="header-text">
+                    <h1>AI Project Idea Generator</h1>
+                    <div class="header-meta">
+                        <span class="meta-tag"><i class="fa-solid fa-microchip"></i> Gemini Flash</span>
+                        <span class="meta-divider">•</span>
+                        <span class="meta-tag"><i class="fa-solid fa-bolt"></i> Google AI</span>
+                        <span class="meta-divider">•</span>
+                        <span class="meta-tag online-tag"><span class="live-dot"></span> Online</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Area Chat -->
+            <div id="chat-box" class="chat-box">
+                <!-- Hero Screen injected by JS -->
+            </div>
+
+            <!-- Scroll to Bottom -->
+            <button id="scroll-bottom-btn" class="scroll-bottom-btn" title="Scroll ke bawah">
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <!-- Input Area -->
+            <div class="input-container">
+                <form id="chat-form" class="input-area">
+                    <div class="input-wrapper">
+                        <input type="text" id="user-input" placeholder="Deskripsikan topik proyek impianmu..." autocomplete="off" required maxlength="500">
+                        <span class="char-counter" id="char-counter">0 / 500</span>
+                    </div>
+                    <button type="submit" title="Kirim" id="send-btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+                <div class="input-hints">
+                    <span><kbd>Enter</kbd> untuk mengirim</span>
+                    <span>•</span>
+                    <span>Powered by <strong>Google</strong> × <strong>Gemini Flash</strong></span>
+                </div>
+            </div>
+
+            <!-- Mobile Overlay -->
+            <div id="mobile-overlay" class="mobile-overlay"></div>
+        </div>
+    </div>
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Keyboard Shortcuts Modal -->
+    <div id="shortcuts-modal" class="shortcuts-modal">
+        <div class="shortcuts-backdrop"></div>
+        <div class="shortcuts-content">
+            <div class="shortcuts-header">
+                <h3><i class="fa-solid fa-keyboard"></i> Keyboard Shortcuts</h3>
+                <button class="shortcuts-close" id="shortcuts-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="shortcuts-body">
+                <div class="shortcut-row"><kbd>Enter</kbd><span>Kirim pesan</span></div>
+                <div class="shortcut-row"><kbd>Alt</kbd> + <kbd>N</kbd><span>Chat baru</span></div>
+                <div class="shortcut-row"><kbd>?</kbd><span>Tampilkan shortcut ini</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
